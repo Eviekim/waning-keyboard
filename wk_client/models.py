@@ -11,7 +11,7 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     hashed_password = db.Column(db.String(80))
     account = db.Column(db.String(80), unique=True, nullable=False)
-
+    
     decisions = db.relationship('Decision', backref='user', lazy=True)
     loans = db.relationship('Loan', backref='user', lazy=True)
     cashflows = db.relationship('CashFlow', backref='user', lazy=True)
@@ -19,6 +19,14 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+class UserData(db.Model):
+    #__tablename__ = 'user_data'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    dob = db.Column(db.String(80), unique=False, nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
 
 class Decision(db.Model):
     """

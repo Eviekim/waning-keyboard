@@ -1,10 +1,12 @@
 import json
+import csv
+from wk_client.constants import EXAMPLE_DOC_REQUIREMENTS
 
 from flask import Blueprint, request, g
 from werkzeug.exceptions import BadRequest
 
-from wk_client import auth, endpoints
-from wk_client.auth_utils import create_user
+from wk_client import auth, endpoints, models
+from wk_client.auth_utils import create_user, create_user_data
 from wk_client.logic import UserAccount
 from wk_client.request_utils import time_now
 from wk_client.settings import BANK_ACCOUNT
@@ -28,12 +30,14 @@ def get_info():
 def register():
     if request.method == 'POST':
         data = request.get_json()
+        
         try:
             username = data['username']
             password = data['password']
             account = data['bank_account']
         except KeyError:
             raise BadRequest()
+        
         user = create_user(username, password, account)
         return json.dumps(user.username)
 
@@ -43,6 +47,7 @@ def register():
 def test_login():
     return json.dumps('Hello {}'.format(auth.username()))
 
+#request log
 
 @bp.route('/get_decision', methods=('GET', 'POST'))
 @auth.login_required
@@ -51,6 +56,14 @@ def get_decision():
         return json.dumps(endpoints.get_decision(g.user, None))
     elif request.method == 'POST':
         data = request.get_json()
+        if(data):
+            dob = data['basic_questions']['date_of_birth']
+            username = g.user.username
+            print("username: ", username)
+            print("dob: ", dob)
+            print(data)
+            print(data['basic_questions']['date_of_birth'])
+            new_stuff = create_user_data(username, dob)
         return json.dumps(endpoints.get_decision(g.user, data))
 
 

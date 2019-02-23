@@ -3,7 +3,7 @@ from hashlib import sha256
 from werkzeug.exceptions import BadRequest
 
 from wk_client import auth, db
-from wk_client.models import User
+from wk_client.models import User, UserData
 from flask import g
 
 
@@ -21,6 +21,12 @@ def create_user(username, password, account):
     db.session.commit()
     return user
 
+def create_user_data(username, dob):
+   if User.query.filter_by(username=username).scalar():
+       user_data = UserData(username=username, dob=dob)
+       db.session.add(user_data)
+       db.session.commit()
+       return user_data
 
 @auth.verify_password
 def verify_password(username, password):
