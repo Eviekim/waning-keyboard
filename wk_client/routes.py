@@ -58,12 +58,9 @@ def get_decision():
         data = request.get_json()
         if(data):
             dob = data['basic_questions']['date_of_birth']
+            creditScore = data['credit_report']['score']
             username = g.user.username
-            print("username: ", username)
-            print("dob: ", dob)
-            print(data)
-            print(data['basic_questions']['date_of_birth'])
-            new_stuff = create_user_data(username, dob)
+            new_stuff = create_user_data(username, dob, creditScore)
         return json.dumps(endpoints.get_decision(g.user, data))
 
 

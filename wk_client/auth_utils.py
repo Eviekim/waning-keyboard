@@ -21,9 +21,9 @@ def create_user(username, password, account):
     db.session.commit()
     return user
 
-def create_user_data(username, dob):
+def create_user_data(username, dob, creditScore):
    if User.query.filter_by(username=username).scalar():
-       user_data = UserData(username=username, dob=dob)
+       user_data = UserData(username=username, dob=dob, creditScore=creditScore)
        db.session.add(user_data)
        db.session.commit()
        return user_data
