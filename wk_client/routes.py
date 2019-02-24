@@ -59,6 +59,11 @@ def get_decision():
         if(data):
             dob = data['basic_questions']['date_of_birth']
             creditScore = data['credit_report']['score']
+            #creditLimit = data['credit_report']['credit_limit']
+            #creditUtilisation = data['credit_report']['credit_utilisation']
+            #numberOfAccounts = data['credit_report']['number of accounts']
+            #ageOfOldestAccount = data['credit_report']['age_of_oldest_account']
+            #creditSearchesLast12m = data['credit_report']['credit_searches_last_12m']
             missedPayments = data['credit_report']['missed_payments_last_12m']
             username = g.user.username
             new_stuff = create_user_data(username, dob, creditScore, missedPayments)

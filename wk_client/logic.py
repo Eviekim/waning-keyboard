@@ -290,10 +290,56 @@ def check_requirements(data, requirements):
 
 
 def evaluate_decision(data):
-    dob = dateutil.parser.parse(data['basic_questions']['date_of_birth'])
-    if dob.year < 1989:
-        params = {'amount': 5000, 'interest_rate': 0.0005, 'fee_amount': 0, 'fee_rate': 0}
+    #setting important client var
+    dob = dateutil.parser.parse(data['basic_questions']['date_of_birth']) #no if >75
+    missedPayments = data['credit_report']['missed_payments_last_12m'] #no if >1
+    creditScore = data['credit_report']['score']
+    companyScore = data['company_report']['score']
+    liability = data['company_report']['assets']
+    asset = data['company_report']['liabilities']
+    opinion = data['company_report']['opinion']
+    
+    
+    #decision var, set all to false
+    ageReq = false
+    missedPaymentsReq = false
+    creditScoreReq = false
+    companyScoreReq = false
+    liabilityAssetRatioReq = false
+    opinionReq = false #how to we asses this
+    
+    
+    #logic
+    if (dob.year - now.year) < 75:
+        ageReq = true
+    if ( missedPayments < 1):
+        missedPaymentsReq = true;
+    if (creditScore > 75):
+        creditScoreReq = true
+    if (companyScore > 75):
+        companyScoreReq = true
+    if (liability < asset):
+        liabilityAssetRatioReq = true
+
+
+
+    
+    if (ageReq and missedPaymentsReq and creditScoreReq and liabilityAssetRatioReq ):
+        params = evaluate_params(data)
         return DecisionParams(approved=True, params=params)
     else:
         return DecisionParams(approved=False)
 
+def evaluate_params(data):
+    #we have to go live yolo
+    amount = 1000
+    interest_rate = 0.1
+    fee_amount = 50
+    fee_rate = 0
+    
+    metrics = {A, B, C, D, E, F, G}
+    
+    
+# basic params = {'amount': 5000, 'interest_rate': 0.0005, 'fee_amount': 0, 'fee_rate': 0}
+    params = {'amount': amount, 'interest_rate': interest_rate, 'fee_amount': fee_amount, 'fee_rate': fee_rate}
+    return params
