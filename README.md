@@ -89,5 +89,33 @@ Compound - Compount interest (interest charged on full balance)
 
 `Bullet` - Full balance paid off in one go at the end of the term.  
 
+### F & B Hackathon 2019:
+![F & B Hackathon 2019](Desktop/FB.hackathon_img1.png)
+<br/>
+![F & B Hackathon 2019](Desktop/FB.hackathon_img2.png)
+<br/>
 
+Below are screenshots of one example of decision test
+
+decision_test
+![decision_test](Desktop/decision_test1.png)
+<br/>
+![decision_test](Desktop/decision_test2.png)
+<br/>
+![decision_test](Desktop/decision_test3.png)
+<br/>
+![decision_test](Desktop/decision_test4.png)
+<br/>
+![decision_test](Desktop/decision_test5.png)
+<br/>
+![decision_test](Desktop/decision_test6.png)
+<br/>
+![decision_test](Desktop/decision_test7.png)
+<br/>
+![decision_test](Desktop/decision_test8.png)
+<br/>
+![decision_test](Desktop/decision_test9.png)
+<br/>
+![decision_test](Desktop/decision_test10.png)
+<br/>
 
